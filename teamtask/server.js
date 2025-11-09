@@ -1,4 +1,5 @@
 import authRoutes from "./routes/auth.js";
+import taskRoutes from "./routes/tasks.js";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -23,4 +24,5 @@ app.get("/api/health", async (_, res) => {
 });
 
 const PORT = process.env.PORT || 4000;
+app.use("/api/tasks", taskRoutes);
 app.listen(PORT, () => console.log(`✅ Server running on http://localhost:${PORT}`));
