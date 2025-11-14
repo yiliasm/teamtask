@@ -76,4 +76,28 @@ router.delete("/:taskId", async (req, res) => {
   }
 });
 
+// update ONLY status
+router.patch("/:taskId/status", async (req, res) => {
+  try {
+    const { taskId } = req.params;
+    const { status } = req.body;
+
+    const validStatuses = ["NOT_STARTED", "IN_PROGRESS", "COMPLETED"];
+    if (!validStatuses.includes(status)) {
+      return res.status(400).json({ message: "Invalid status" });
+    }
+
+    await pool.query(
+      `UPDATE tasks SET status=? WHERE id=?`,
+      [status, taskId]
+    );
+
+    res.json({ message: "Status updated" });
+  } catch (err) {
+    console.error("Status update error:", err.message);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
 export default router;
