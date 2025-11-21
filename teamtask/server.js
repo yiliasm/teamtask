@@ -1,11 +1,12 @@
 import authRoutes from "./routes/auth.js";
 import taskRoutes from "./routes/tasks.js";
+import "./utils/cron.js";
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import pool from "./db.js";
-import progressRoutes from "./routes/progress.js";
 import userRoutes from "./routes/users.js";
+import emailTestRoutes from "./routes/emailTest.js";
 
 dotenv.config();
 
@@ -13,7 +14,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
-app.use("/api/progress", progressRoutes);
+app.use("/api/email", emailTestRoutes);
 app.use("/api/users", userRoutes);
 
 // verify database connection
