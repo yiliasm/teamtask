@@ -4,7 +4,7 @@ import sendEmail from "./mailer.js";
 
 // run every day at 9:00 AM
 cron.schedule("0 9 * * *", async () => {
-  console.log("🔔 Running daily task reminder check...");
+  console.log("Daily task reminder check...");
 
   try {
     // notify for tasks that are 1 or 3 days from deadline
